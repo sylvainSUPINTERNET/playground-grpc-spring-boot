@@ -26,9 +26,15 @@ message Stock {
   int32 id = 1;
 }
 
+message StockDetail {
+  int32 id = 1;
+  string name = 2;
+}
+
 
 service EmployeeService {
   rpc getEmployee(EmployeeRequest) returns (EmployeeResponse) {};
   rpc getEmployees(Empty) returns (EmployeeResponseList) {};
   rpc getStock(Empty) returns (stream Stock) {};
+  rpc streamGetStock(stream Stock) returns (stream StockDetail) {};
 }

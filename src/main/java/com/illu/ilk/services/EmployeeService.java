@@ -8,6 +8,8 @@ import com.illu.ilk.employee.EmployeeResponse;
 import com.illu.ilk.employee.EmployeeDetail;
 import com.illu.ilk.employee.EmployeeServiceGrpc;
 import io.grpc.stub.StreamObserver;
+import com.illu.ilk.employee.StockDetail;
+
 import net.devh.boot.grpc.server.service.GrpcService;
 
 @GrpcService
@@ -64,4 +66,27 @@ public class EmployeeService extends EmployeeServiceGrpc.EmployeeServiceImplBase
 
         responseObserver.onCompleted();
     }
+
+    @Override
+    public StreamObserver<Stock> streamGetStock(StreamObserver<StockDetail> responseObserver ) {
+        return new StreamObserver<Stock>() {
+            @Override
+            public void onNext(Stock value) {
+                System.out.println(value);
+                responseObserver.onNext(StockDetail.newBuilder().setId(value.getId()).build());
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                responseObserver.onError(t);
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
+    
 }
