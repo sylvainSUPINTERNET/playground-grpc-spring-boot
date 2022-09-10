@@ -22,9 +22,13 @@ message EmployeeResponseList {
 
 message Empty {}
 
+message Stock {
+  int32 id = 1;
+}
+
 
 service EmployeeService {
   rpc getEmployee(EmployeeRequest) returns (EmployeeResponse) {};
   rpc getEmployees(Empty) returns (EmployeeResponseList) {};
-
+  rpc getStock(Empty) returns (stream Stock) {};
 }

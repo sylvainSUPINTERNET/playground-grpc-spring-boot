@@ -1,6 +1,7 @@
 package com.illu.ilk.services;
 
 import com.illu.ilk.employee.Empty;
+import com.illu.ilk.employee.Stock;
 import com.illu.ilk.employee.EmployeeResponseList;
 import com.illu.ilk.employee.EmployeeRequest;
 import com.illu.ilk.employee.EmployeeResponse;
@@ -46,6 +47,21 @@ public class EmployeeService extends EmployeeServiceGrpc.EmployeeServiceImplBase
             .addEmployee(EmployeeDetail.newBuilder().setName("tot").build())
             .build()
         );
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getStock(Empty request, StreamObserver<Stock> responseObserver) {
+
+        try {
+            for (int i=0;i<10;i++) {
+                responseObserver.onNext(Stock.newBuilder().setId(i).build());
+                Thread.sleep(2000);
+            }
+        } catch ( Exception e ) {
+            responseObserver.onError(e);
+        }
+
         responseObserver.onCompleted();
     }
 }
