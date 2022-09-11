@@ -6,3 +6,14 @@
 ./mvnw spring-boot:run
 
 ````
+
+
+```` bash
+# Si on l'erreur par rapport au clé 
+
+$ minikube start 
+
+````
+
+
+https://spring.io/guides/gs/spring-boot-kubernetes/
